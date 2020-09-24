@@ -39,7 +39,7 @@ lazy val `ReactiveMongo-BSON-Compat` = project.in(file("bson-compat")).
     libraryDependencies ++= {
       if (scalaBinaryVersion.value != "2.10") {
         Dependencies.shaded.value ++ Seq(
-          organization.value %% "reactivemongo-bson-api" % version.value % Provided,
+          organization.value %% "reactivemongo-bson-api" % version.value.split("-").head % Provided,
           Dependencies.specs.value)
 
       } else {
@@ -105,8 +105,7 @@ lazy val `ReactiveMongo-Core` = project.in(file("core")).
         val deps = Dependencies.shaded.value
 
         if (scalaBinaryVersion.value != "2.10") {
-          ("org.reactivemongo" %% "reactivemongo-bson-api" % version.
-            value) +: deps
+          ("org.reactivemongo" %% "reactivemongo-bson-api" % version.value.split("-").head) +: deps
         } else {
           deps
         }
@@ -143,7 +142,7 @@ lazy val `ReactiveMongo-Root` = project.in(file(".")).
 lazy val benchmarks = (project in file("benchmarks")).
   enablePlugins(JmhPlugin).
   settings(Compiler.settings ++ Seq(
-      libraryDependencies += organization.value % "reactivemongo-shaded" % version.value
+      libraryDependencies += organization.value % "reactivemongo-shaded" % version.value.split("-").head
     )
   ).
   dependsOn(

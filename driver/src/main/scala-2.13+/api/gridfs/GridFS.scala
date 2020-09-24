@@ -302,7 +302,7 @@ sealed trait GridFS[P <: SerializationPack with Singleton]
 
     val deleteChunkCmd = Delete(
       Seq(DeleteElement(
-        q = document(Seq(elem("files_id", id))), 1, None)),
+        q = document(Seq(elem("files_id", id))), 0, None)),
       ordered = false,
       writeConcern = defaultWriteConcern)
 
